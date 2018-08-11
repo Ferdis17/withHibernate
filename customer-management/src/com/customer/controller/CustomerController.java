@@ -10,22 +10,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.customer.dao.CustomerDao;
 import com.customer.entity.Customer;
+import com.customer.service.CustomerService;
 
 @Controller
 @RequestMapping("/customer")
 public class CustomerController {
 	
 	@Autowired
-	private CustomerDao customerDao;
+	private CustomerService customerService;
 	
 	@GetMapping("/list")
 	public String listCustomers(Model model) {
 		
-		List<Customer>customers = customerDao.getCustomers();
+		List<Customer>customers = customerService.getCustomers();
 		
 		model.addAttribute("customers", customers);
 		
 		return "list-customers";
+	}
+	@GetMapping("/showFormForAdd")
+	public String showFormForAdd(Model model) {
+		
+		Customer theCustomer = new Customer();
+		model.addAttribute("customer", theCustomer);
+		return "customer-form";
+		
 	}
 
 }
