@@ -1,2 +1,5 @@
 /.metadata/
 /.recommenders/
+/customer-management/nbproject/private/
+/customer-management/dist/
+/customer-management/nbbuild/
