@@ -35,4 +35,27 @@ public class CustomerDaImpl implements CustomerDao {
 		return customers;
 	}
 
+    @Override
+    public void saveCustomer(Customer theCustomer) {
+        Session currentSession = sessionFactory.getCurrentSession();
+        currentSession.saveOrUpdate(theCustomer);
+    }
+
+    @Override
+    public Customer getCustomer(int id) {
+        
+        Session currentSession = sessionFactory.getCurrentSession();
+        Customer customer = currentSession.get(Customer.class, id);
+        return customer;
+    }
+
+    @Override
+    public void deleteCustomer(int theId) {
+        Session currentSession = sessionFactory.getCurrentSession();
+        
+        Query theQuery = currentSession.createQuery("delete from Customer where id=:id");
+        theQuery.setParameter("id", theId);
+        theQuery.executeUpdate();
+    }
+
 }
